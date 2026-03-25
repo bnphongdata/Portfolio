@@ -47,6 +47,7 @@ body {
   white-space: nowrap; /* Giữ trên 1 dòng */
   display: inline-block;
   position: relative;
+  height: 1.2em; /* Đảm bảo chiều cao đủ cho text */
 }
 
 .typewriter-cursor {

@@ -19,6 +19,16 @@
     <link rel="stylesheet" href="css/main.css" />
 
     <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"
+    ></script>
+    <script type="text/javascript">
+      (function () {
+        emailjs.init("service_ai67tqg"); // Thay bằng Public Key của bạn
+      })();
+    </script>
   </head>
   <body class="bg-white text-gray-800">
     <!-- LOADING SCREEN -->
@@ -93,7 +103,7 @@
           <p
             class="text-2xl sm:text-3xl lg:text-4xl font-light text-gray-600 mb-8"
           >
-            Data Analyst
+            Data
           </p>
           <p
             class="text-lg sm:text-xl max-w-3xl mx-auto mb-12 text-gray-700 leading-relaxed"

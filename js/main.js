@@ -6,27 +6,52 @@ document.addEventListener("DOMContentLoaded", () => {
     offset: 100,
   });
 
-  // Contact Form Simulation
+  // Contact Form Logic với EmailJS
   const form = document.getElementById("contact-form");
   if (form) {
     form.addEventListener("submit", (e) => {
       e.preventDefault();
-      if (form.checkValidity()) {
-        alert(
-          "✅ Message sent successfully! (Simulation - No backend yet)\n\nI'll get back to you soon!",
-        );
-        form.reset();
-      } else {
-        alert("Please fill in all fields correctly.");
-      }
+
+      // Hiệu ứng loading trên nút gửi
+      const btn = form.querySelector("button");
+      const originalBtnText = btn.textContent;
+      btn.textContent = "Sending...";
+      btn.disabled = true;
+
+      // Gửi email qua EmailJS
+      emailjs
+        .sendForm("service_ai67tqg", "template_gw6doia", form)
+        .then(
+          () => {
+            alert(
+              "✅ Cảm ơn bạn! Tin nhắn đã được gửi thành công. Mình sẽ phản hồi sớm nhất có thể!",
+            );
+            form.reset();
+          },
+          (error) => {
+            console.error("EmailJS Error:", error);
+            alert(
+              "❌ Có lỗi xảy ra khi gửi tin nhắn. Bạn vui lòng liên hệ trực tiếp qua Email hoặc LinkedIn nhé!",
+            );
+          },
+        )
+        .finally(() => {
+          btn.textContent = originalBtnText;
+          btn.disabled = false;
+        });
     });
   }
 
-  // ── Typewriter Effect Nâng Cao ────────────────────────────────
   const nameElement = document.getElementById("typewriter-name");
   if (!nameElement) return; // bảo vệ nếu không tìm thấy element
 
-  const texts = ["NHAT PHONG", "DATA ANALYST"];
+  const texts = [
+    "NHAT PHONG",
+    "DATA ANALYST",
+    "Data Scientist",
+    "Data Engineer",
+    "Machine Learning Engineer ",
+  ];
   let textIndex = 0;
   let isDeleting = false;
   let charIndex = 0;
@@ -47,14 +72,13 @@ document.addEventListener("DOMContentLoaded", () => {
     let speed = isDeleting ? 60 : 120; // xóa nhanh hơn gõ
 
     if (!isDeleting && charIndex === currentFull.length) {
-      // Gõ xong → pause rồi bắt đầu xóa
       isDeleting = true;
       speed = 5000; // pause 5 giây trước khi xóa
     } else if (isDeleting && charIndex === 0) {
       // Xóa xong → chuyển sang text tiếp theo
       isDeleting = false;
       textIndex = (textIndex + 1) % texts.length;
-      speed = 500; // pause nhỏ trước khi bắt đầu gõ text mới
+      speed = 500;
     }
 
     setTimeout(typeAdvanced, speed);
@@ -82,7 +106,7 @@ document.addEventListener("DOMContentLoaded", () => {
           once: true,
         });
       }, 200);
-    }, 2000); // Đảm bảo loader hiển thị ít nhất 2.5 giây
+    }, 2000);
   });
   lucide.createIcons();
 });
