@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // Gửi email qua EmailJS
       emailjs
-        .sendForm("service_ai67tqg", "template_gw6doia", form)
+        .sendForm("service_ai67tqg", "template_qcoubky", form)
         .then(
           () => {
             alert(
